@@ -34,11 +34,26 @@ program
       });
   });
 
+program
+  .command('*')
+  .arguments('<env> <cmd>')
+  .description('Run command on host')
+  .action(function(env, command){
+    (new Config()).load().get(env)
+      .forEach(function(machine){
+        var clucLine = (new Cluc())
+          .tail(command, function(){
+            this.display();
+          });
+        (new (Cluc.transports.ssh)()).run(clucLine, machine.ssh, function(){});
+      });
+  });
 
 program
-  .command('*').description('help')
-  .action(function(){
-    program.outputHelp();
+  .on('--help', function() {
+    process.nextTick(function(){
+      program.help();
+    })
   });
 
 program.parse(process.argv);
