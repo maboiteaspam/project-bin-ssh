@@ -1,14 +1,18 @@
 {
   "name": "project-bin-ssh",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Execute SSH commands on your remote machines",
+  "bin": {
+    "project-ssh":"index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "maboiteaspam",
   "license": "WTF",
   "dependencies": {
-    "cluc": "^1.0.19"
+    "cluc": "^1.0.19",
+    "commander": "^2.8.1",
+    "project-bin-config": "git://github.com/maboiteaspam/project-bin-config"
   }
 }
